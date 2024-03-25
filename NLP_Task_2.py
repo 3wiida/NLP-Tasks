@@ -3,7 +3,7 @@ from nltk.tokenize import word_tokenize
 from nltk.stem.porter import PorterStemmer as p_stem
 from nltk.stem.snowball import SnowballStemmer as s_stem
 
-dataset_path = "Dataset/dataset.csv"
+dataset_path = "Dataset/emotion_dataset.csv"
 porter_results_path = "Results/porter_output.csv"
 snowball_results_path = "Results/snowball_output.csv"
 
@@ -24,8 +24,8 @@ def stem_by_snowball(words):
 
 def process():
     data_frame = read_dataset(dataset_path)
-    data_frame["porter_stem_output"] = data_frame["original_text"].apply(tokenize_quote).apply(stem_by_porter)
-    data_frame["snowball_stem_output"] = data_frame["original_text"].apply(tokenize_quote).apply(stem_by_snowball)
+    data_frame["porter_stem_output"] = data_frame["text"].apply(tokenize_quote).apply(stem_by_porter)
+    data_frame["snowball_stem_output"] = data_frame["text"].apply(tokenize_quote).apply(stem_by_snowball)
     print(data_frame["porter_stem_output"])
     
     data_frame["porter_stem_output"].to_csv(porter_results_path,index=False)
